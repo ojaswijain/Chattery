@@ -53,7 +53,7 @@ class _LoginState extends State<Login> {
                 style: TextStyle(
                   fontSize: 12.0,
                   fontWeight: FontWeight.w300,
-                  color: Theme.of(context).accentColor,
+                  color: Theme.of(context).colorScheme.secondary,
                 ),
               ),
             ),
@@ -73,7 +73,7 @@ class _LoginState extends State<Login> {
                     'Sign up',
                     style: TextStyle(
                       fontWeight: FontWeight.bold,
-                      color: Theme.of(context).accentColor,
+                      color: Theme.of(context).colorScheme.secondary,
                     ),
                   ),
                 ),
@@ -152,7 +152,7 @@ class _LoginState extends State<Login> {
                   ),
                 ),
                 backgroundColor: MaterialStateProperty.all<Color>(
-                  Theme.of(context).accentColor,
+                  Theme.of(context).colorScheme.secondary,
                 ),
               ),
               // highlightElevation: 4.0,

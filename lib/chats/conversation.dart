@@ -182,12 +182,12 @@ class _ConversationState extends State<Conversation> {
   ) {
     if (user.isOnline) {
       if (typing) {
-        return "typing...";
+        return "Typing...";
       } else {
-        return "online";
+        return "Online";
       }
     } else {
-      return 'last seen ${timeago.format(user.lastSeen.toDate())}';
+      return 'Last seen at ${timeago.format(user.lastSeen.toDate())}';
     }
   }
 
