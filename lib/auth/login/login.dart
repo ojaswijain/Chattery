@@ -24,25 +24,25 @@ class _LoginState extends State<Login> {
       progressIndicator: circularProgress(context),
       inAsyncCall: viewModel.loading,
       child: Scaffold(
-        backgroundColor: Colors.white,
+        backgroundColor: Colors.yellow,
         key: viewModel.scaffoldKey,
         body: ListView(
-          padding: EdgeInsets.symmetric(horizontal: 15.0, vertical: 20.0),
+          padding: EdgeInsets.symmetric(horizontal: 14.0, vertical: 19.0),
           children: [
-            SizedBox(height: 60.0),
+            SizedBox(height: 62.0),
             Container(
-              height: 170.0,
+              height: 172.0,
               width: MediaQuery.of(context).size.width,
               child: Image.asset(
                 'assets/images/login.png',
               ),
             ),
-            SizedBox(height: 10.0),
+            SizedBox(height: 11.0),
             Center(
               child: Text(
-                'Welcome back!',
+                'Welcome back to Chattery!',
                 style: TextStyle(
-                  fontSize: 23.0,
+                  fontSize: 22.0,
                   fontWeight: FontWeight.w900,
                 ),
               ),

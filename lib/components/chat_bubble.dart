@@ -28,17 +28,17 @@ class _ChatBubbleState extends State<ChatBubble> {
       return Theme.of(context).colorScheme.secondary;
     } else {
       if (Theme.of(context).brightness == Brightness.dark) {
-        return Colors.grey[800];
+        return Colors.grey[700];
       } else {
-        return Colors.grey[200];
+        return Colors.grey[300];
       }
     }
   }
   Color chatBubbleReplyColor() {
     if (Theme.of(context).brightness == Brightness.dark) {
-      return Colors.grey[800];
+      return Colors.grey[850];
     } else {
-      return Colors.grey[100];
+      return Colors.grey[150];
     }
   }
 

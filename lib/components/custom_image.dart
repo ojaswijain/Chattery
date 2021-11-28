@@ -10,7 +10,7 @@ class CustomImage extends StatelessWidget {
 
   CustomImage({
     this.imageUrl,
-    this.height = 100.0,
+    this.height = 110.0,
     this.width = double.infinity,
     this.fit = BoxFit.cover,
   });

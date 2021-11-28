@@ -20,7 +20,7 @@ class FabContainer extends StatelessWidget {
       closedElevation: 4.0,
       closedShape: const RoundedRectangleBorder(
         borderRadius: BorderRadius.all(
-          Radius.circular(56 / 2),
+          Radius.circular(54 / 2),
         ),
       ),
       closedColor: Theme.of(context).scaffoldBackgroundColor,
@@ -71,7 +71,7 @@ class FabContainer extends StatelessWidget {
                   CupertinoIcons.camera_on_rectangle,
                   size: 25.0,
                 ),
-                title: Text('Make a Post'),
+                title: Text('Post something'),
                 onTap: () {
                   Navigator.pop(context);
                   Navigator.of(context).push(
