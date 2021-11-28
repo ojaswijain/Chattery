@@ -94,7 +94,7 @@ class _RegisterState extends State<Register> {
               viewModel.setEmail(val);
             },
             focusNode: viewModel.emailFN,
-            nextFocusNode: viewModel.countryFN,
+            nextFocusNode: viewModel.genderFN,
           ),
           SizedBox(height: 20.0),
           TextFormBuilder(
@@ -106,7 +106,7 @@ class _RegisterState extends State<Register> {
             onSaved: (String val) {
               viewModel.setGender(val);
             },
-            focusNode: viewModel.countryFN,
+            focusNode: viewModel.genderFN,
             nextFocusNode: viewModel.passFN,
           ),
           SizedBox(height: 20.0),

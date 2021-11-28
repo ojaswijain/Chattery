@@ -12,7 +12,7 @@ class RegisterViewModel extends ChangeNotifier {
   String username, email, gender, password, cPassword;
   FocusNode usernameFN = FocusNode();
   FocusNode emailFN = FocusNode();
-  FocusNode countryFN = FocusNode();
+  FocusNode genderFN = FocusNode();
   FocusNode passFN = FocusNode();
   FocusNode cPassFN = FocusNode();
   AuthService auth = AuthService();

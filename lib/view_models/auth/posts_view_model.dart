@@ -27,7 +27,6 @@ class PostsViewModel extends ChangeNotifier {
   String username;
   File mediaUrl;
   final picker = ImagePicker();
-  String location;
   Position position;
   Placemark placemark;
   String bio;
@@ -42,9 +41,6 @@ class PostsViewModel extends ChangeNotifier {
   bool edit = false;
   String id;
 
-  //controllers
-  TextEditingController locationTEC = TextEditingController();
-
   //Setters
   setEdit(bool val) {
     edit = val;
@@ -55,7 +51,6 @@ class PostsViewModel extends ChangeNotifier {
     if (post != null) {
       description = post.description;
       imgLink = post.mediaUrl;
-      location = post.location;
       edit = true;
       edit = false;
       notifyListeners();
@@ -74,12 +69,6 @@ class PostsViewModel extends ChangeNotifier {
   setDescription(String val) {
     print('SetDescription $val');
     description = val;
-    notifyListeners();
-  }
-
-  setLocation(String val) {
-    print('SetGender $val');
-    location = val;
     notifyListeners();
   }
 
@@ -131,7 +120,7 @@ class PostsViewModel extends ChangeNotifier {
     try {
       loading = true;
       notifyListeners();
-      await postService.uploadPost(mediaUrl, location, description);
+      await postService.uploadPost(mediaUrl, description);
       loading = false;
       resetPost();
       notifyListeners();
@@ -169,7 +158,6 @@ class PostsViewModel extends ChangeNotifier {
   resetPost() {
     mediaUrl = null;
     description = null;
-    location = null;
     edit = null;
     notifyListeners();
   }
