@@ -326,7 +326,7 @@ class _ProfileState extends State<Profile> {
     );
   }
 
-
+//show the toggling icons "grid" or "list" view.
   buildIcons() {
     if (isToggle) {
       return IconButton(
@@ -347,6 +347,7 @@ class _ProfileState extends State<Profile> {
       );
     }
   }
+  
   buildCount(String label, int count) {
     return Column(
       children: <Widget>[
