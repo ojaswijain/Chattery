@@ -77,7 +77,7 @@ class _TimelineState extends State<Timeline> {
       appBar: AppBar(
         automaticallyImplyLeading: false,
         title: Text(
-          'Wooble',
+          'Chattery',
           style: TextStyle(fontWeight: FontWeight.w900),
         ),
         centerTitle: true,

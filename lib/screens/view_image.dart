@@ -87,45 +87,6 @@ class _ViewImageState extends State<ViewImage> {
     );
   }
 
-  addLikesToNotification() async {
-    bool isNotMe = currentUserId() != widget.post.ownerId;
-
-    if (isNotMe) {
-      DocumentSnapshot doc = await usersRef.doc(currentUserId()).get();
-      user = UserModel.fromJson(doc.data());
-      notificationRef
-          .doc(widget.post.ownerId)
-          .collection('notifications')
-          .doc(widget.post.postId)
-          .set({
-        "type": "like",
-        "username": user.username,
-        "userId": currentUserId(),
-        "userDp": user.photoUrl,
-        "postId": widget.post.postId,
-        "mediaUrl": widget.post.mediaUrl,
-        "timestamp": timestamp,
-      });
-    }
-  }
-
-  removeLikeFromNotification() async {
-    bool isNotMe = currentUserId() != widget.post.ownerId;
-
-    if (isNotMe) {
-      DocumentSnapshot doc = await usersRef.doc(currentUserId()).get();
-      user = UserModel.fromJson(doc.data());
-      notificationRef
-          .doc(widget.post.ownerId)
-          .collection('notifications')
-          .doc(widget.post.postId)
-          .get()
-          .then((doc) => {
-                if (doc.exists) {doc.reference.delete()}
-              });
-    }
-  }
-
   buildLikeButton() {
     return StreamBuilder(
       stream: likesRef
@@ -143,10 +104,8 @@ class _ViewImageState extends State<ViewImage> {
                   'postId': widget.post.postId,
                   'dateCreated': Timestamp.now(),
                 });
-                addLikesToNotification();
               } else {
                 likesRef.doc(docs[0].id).delete();
-                removeLikeFromNotification();
               }
             },
             icon: docs.isEmpty

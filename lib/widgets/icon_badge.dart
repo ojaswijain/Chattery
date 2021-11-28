@@ -1,6 +1,4 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import 'package:social_media_app/utils/firebase.dart';
 
 class IconBadge extends StatefulWidget {
   final IconData icon;
@@ -42,28 +40,10 @@ class _IconBadgeState extends State<IconBadge> {
               minHeight: 11,
             ),
             child:
-                Padding(padding: EdgeInsets.only(top: 1), child: buildCount()),
+                Padding(padding: EdgeInsets.only(top: 1)),
           ),
         ),
       ],
-    );
-  }
-
-  buildCount() {
-    StreamBuilder(
-      stream: notificationRef
-          .doc(firebaseAuth.currentUser.uid)
-          .collection('notifications')
-          .snapshots(),
-      builder: (context, AsyncSnapshot<QuerySnapshot> snapshot) {
-        if (snapshot.hasData) {
-          QuerySnapshot snap = snapshot.data;
-          List<DocumentSnapshot> docs = snap.docs;
-          return buildTextWidget(docs?.length ?? 0.toString());
-        } else {
-          return buildTextWidget(0.toString());
-        }
-      },
     );
   }
 

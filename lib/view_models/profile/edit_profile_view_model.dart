@@ -16,7 +16,7 @@ class EditProfileViewModel extends ChangeNotifier {
   UserService userService = UserService();
   final picker = ImagePicker();
   UserModel user;
-  String country;
+  String gender;
   String username;
   String bio;
   File image;
@@ -31,9 +31,9 @@ class EditProfileViewModel extends ChangeNotifier {
     imgLink = user.photoUrl;
   }
 
-  setCountry(String val) {
+  setGender(String val) {
     print('Set Gender $val');
-    country = val;
+    gender = val;
     notifyListeners();
   }
 
@@ -65,7 +65,7 @@ class EditProfileViewModel extends ChangeNotifier {
           image: image,
           username: username,
           bio: bio,
-          country: country,
+          gender: gender,
         );
         print(success);
         if (success) {

@@ -135,14 +135,14 @@ class _EditProfileState extends State<EditProfile> {
             ),
             SizedBox(height: 10.0),
             TextFormBuilder(
-              initialValue: widget.user.country,
+              initialValue: widget.user.gender,
               enabled: !viewModel.loading,
               prefix: Feather.users,
               hintText: "Gender",
               textInputAction: TextInputAction.next,
               validateFunction: Validations.validateName,
               onSaved: (String val) {
-                viewModel.setCountry(val);
+                viewModel.setGender(val);
               },
             ),
             SizedBox(height: 10.0),

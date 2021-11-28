@@ -3,7 +3,6 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_icons/flutter_icons.dart';
 import 'package:social_media_app/components/fab_container.dart';
-import 'package:social_media_app/pages/notification.dart';
 import 'package:social_media_app/pages/profile.dart';
 import 'package:social_media_app/pages/search.dart';
 import 'package:social_media_app/pages/feeds.dart';
@@ -37,16 +36,10 @@ class _TabScreenState extends State<TabScreen> {
       'index': 2,
     },
     {
-      'title': 'Notification',
-      'icon': CupertinoIcons.bell_solid,
-      'page': Activities(),
-      'index': 3,
-    },
-    {
       'title': 'Profile',
       'icon': CupertinoIcons.person,
       'page': Profile(profileId: firebaseAuth.currentUser.uid),
-      'index': 4,
+      'index': 3,
     },
   ];
 
@@ -84,7 +77,7 @@ class _TabScreenState extends State<TabScreen> {
                           item['icon'],
                           color: item['index'] != _page
                               ? Colors.grey
-                              : Theme.of(context).accentColor,
+                              : Theme.of(context).colorScheme.secondary,
                           size: 20.0,
                         ),
                         onPressed: () => navigationTapped(item['index']),

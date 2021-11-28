@@ -122,7 +122,7 @@ class _CommentsState extends State<Comments> {
                             padding: const EdgeInsets.only(right: 10.0),
                             child: Icon(
                               Icons.send,
-                              color: Theme.of(context).accentColor,
+                              color: Theme.of(context).colorScheme.secondary,
                             ),
                           ),
                         ),
@@ -261,11 +261,8 @@ class _CommentsState extends State<Comments> {
                   'postId': widget.post.postId,
                   'dateCreated': Timestamp.now(),
                 });
-                addLikesToNotification();
               } else {
                 likesRef.doc(docs[0].id).delete();
-
-                removeLikeFromNotification();
               }
             },
             icon: docs.isEmpty
@@ -294,44 +291,5 @@ class _CommentsState extends State<Comments> {
         ),
       ),
     );
-  }
-
-  addLikesToNotification() async {
-    bool isNotMe = currentUserId() != widget.post.ownerId;
-
-    if (isNotMe) {
-      DocumentSnapshot doc = await usersRef.doc(currentUserId()).get();
-      user = UserModel.fromJson(doc.data());
-      notificationRef
-          .doc(widget.post.ownerId)
-          .collection('notifications')
-          .doc(widget.post.postId)
-          .set({
-        "type": "like",
-        "username": user.username,
-        "userId": currentUserId(),
-        "userDp": user.photoUrl,
-        "postId": widget.post.postId,
-        "mediaUrl": widget.post.mediaUrl,
-        "timestamp": timestamp,
-      });
-    }
-  }
-
-  removeLikeFromNotification() async {
-    bool isNotMe = currentUserId() != widget.post.ownerId;
-
-    if (isNotMe) {
-      DocumentSnapshot doc = await usersRef.doc(currentUserId()).get();
-      user = UserModel.fromJson(doc.data());
-      notificationRef
-          .doc(widget.post.ownerId)
-          .collection('notifications')
-          .doc(widget.post.postId)
-          .get()
-          .then((doc) => {
-                if (doc.exists) {doc.reference.delete()}
-              });
-    }
   }
 }

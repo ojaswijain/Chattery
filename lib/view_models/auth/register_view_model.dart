@@ -9,7 +9,7 @@ class RegisterViewModel extends ChangeNotifier {
   GlobalKey<FormState> formKey = GlobalKey<FormState>();
   bool validate = false;
   bool loading = false;
-  String username, email, country, password, cPassword;
+  String username, email, gender, password, cPassword;
   FocusNode usernameFN = FocusNode();
   FocusNode emailFN = FocusNode();
   FocusNode countryFN = FocusNode();
@@ -34,7 +34,7 @@ class RegisterViewModel extends ChangeNotifier {
             name: username,
             email: email,
             password: password,
-            country: country,
+            gender: gender,
           );
           print(success);
           if (success) {
@@ -79,8 +79,8 @@ class RegisterViewModel extends ChangeNotifier {
     notifyListeners();
   }
 
-  setCountry(val) {
-    country = val;
+  setGender(val) {
+    gender = val;
     notifyListeners();
   }
 

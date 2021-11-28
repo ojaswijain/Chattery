@@ -142,7 +142,7 @@ class _ProfileState extends State<Profile>  {
                                         Container(
                                           width: 130.0,
                                           child: Text(
-                                            user?.country,
+                                            user?.gender,
                                             style: TextStyle(
                                               fontSize: 12.0,
                                               fontWeight: FontWeight.w600,
@@ -463,17 +463,6 @@ class _ProfileState extends State<Profile>  {
         doc.reference.delete();
       }
     });
-    //remove from notifications feeds
-    notificationRef
-        .doc(widget.profileId)
-        .collection('notifications')
-        .doc(currentUserId())
-        .get()
-        .then((doc) {
-      if (doc.exists) {
-        doc.reference.delete();
-      }
-    });
   }
 
   handleFollow() async {
@@ -494,19 +483,6 @@ class _ProfileState extends State<Profile>  {
         .collection('userFollowing')
         .doc(widget.profileId)
         .set({});
-    //update the notification feeds
-    notificationRef
-        .doc(widget.profileId)
-        .collection('notifications')
-        .doc(currentUserId())
-        .set({
-      "type": "follow",
-      "ownerId": widget.profileId,
-      "username": users.username,
-      "userId": users.id,
-      "userDp": users.photoUrl,
-      "timestamp": timestamp,
-    });
   }
 
   buildPostView() {

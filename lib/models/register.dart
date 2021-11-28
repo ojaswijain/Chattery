@@ -3,7 +3,6 @@ class Register {
   String username;
   String email;
   String gender;
-  String country;
   String password;
   String passwordConfirmation;
   bool publicEmail = false;

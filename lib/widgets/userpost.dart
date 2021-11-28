@@ -186,11 +186,8 @@ class UserPost extends StatelessWidget {
                   'postId': post.postId,
                   'dateCreated': Timestamp.now(),
                 });
-                addLikesToNotification();
               } else {
                 likesRef.doc(docs[0].id).delete();
-                services.removeLikeFromNotification(
-                    post.ownerId, post.postId, currentUserId());
               }
             },
             icon: docs.isEmpty
@@ -206,17 +203,6 @@ class UserPost extends StatelessWidget {
         return Container();
       },
     );
-  }
-
-  addLikesToNotification() async {
-    bool isNotMe = currentUserId() != post.ownerId;
-
-    if (isNotMe) {
-      DocumentSnapshot doc = await usersRef.doc(currentUserId()).get();
-      user = UserModel.fromJson(doc.data());
-      services.addLikesToNotification("like", user.username, currentUserId(),
-          post.postId, post.mediaUrl, post.ownerId, user.photoUrl);
-    }
   }
 
   buildLikesCount(BuildContext context, int count) {
@@ -295,7 +281,7 @@ class UserPost extends StatelessWidget {
                               overflow: TextOverflow.ellipsis,
                             ),
                             Text(
-                              '${post?.location ?? 'Wooble'}',
+                              '${post?.location ?? 'Chattery'}',
                               style: TextStyle(
                                 fontSize: 10.0,
                                 color: Color(0xff4D4D4D),

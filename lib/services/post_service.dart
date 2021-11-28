@@ -34,7 +34,7 @@ class PostService extends Service {
       "ownerId": firebaseAuth.currentUser.uid,
       "mediaUrl": link,
       "description": description ?? "",
-      "location": location ?? "Wooble",
+      "location": location ?? "Chattery",
       "timestamp": Timestamp.now(),
     }).catchError((e) {
       print(e);
@@ -73,69 +73,6 @@ class PostService extends Service {
       "userDp": user.photoUrl,
       "userId": user.id,
     });
-    bool isNotMe = ownerId != currentUserId;
-    if (isNotMe) {
-      addCommentToNotification("comment", comment, user.username, user.id,
-          postId, mediaUrl, ownerId, user.photoUrl);
-    }
   }
 
-//add the comment to notification collection
-  addCommentToNotification(
-      String type,
-      String commentData,
-      String username,
-      String userId,
-      String postId,
-      String mediaUrl,
-      String ownerId,
-      String userDp) async {
-    await notificationRef.doc(ownerId).collection('notifications').add({
-      "type": type,
-      "commentData": commentData,
-      "username": username,
-      "userId": userId,
-      "userDp": userDp,
-      "postId": postId,
-      "mediaUrl": mediaUrl,
-      "timestamp": Timestamp.now(),
-    });
-  }
-
-//add the likes to the notfication collection
-  addLikesToNotification(String type, String username, String userId,
-      String postId, String mediaUrl, String ownerId, String userDp) async {
-    await notificationRef
-        .doc(ownerId)
-        .collection('notifications')
-        .doc(postId)
-        .set({
-      "type": type,
-      "username": username,
-      "userId": firebaseAuth.currentUser.uid,
-      "userDp": userDp,
-      "postId": postId,
-      "mediaUrl": mediaUrl,
-      "timestamp": Timestamp.now(),
-    });
-  }
-
-  //remove likes from notification
-  removeLikeFromNotification(
-      String ownerId, String postId, String currentUser) async {
-    bool isNotMe = currentUser != ownerId;
-
-    if (isNotMe) {
-      DocumentSnapshot doc = await usersRef.doc(currentUser).get();
-      user = UserModel.fromJson(doc.data());
-      notificationRef
-          .doc(ownerId)
-          .collection('notifications')
-          .doc(postId)
-          .get()
-          .then((doc) => {
-                if (doc.exists) {doc.reference.delete()}
-              });
-    }
-  }
 }

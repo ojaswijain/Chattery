@@ -40,20 +40,10 @@ class _LoginState extends State<Login> {
             SizedBox(height: 10.0),
             Center(
               child: Text(
-                'Welcome back!',
+                'Chattery',
                 style: TextStyle(
                   fontSize: 23.0,
                   fontWeight: FontWeight.w900,
-                ),
-              ),
-            ),
-            Center(
-              child: Text(
-                'Log into your account and get started!',
-                style: TextStyle(
-                  fontSize: 12.0,
-                  fontWeight: FontWeight.w300,
-                  color: Theme.of(context).colorScheme.secondary,
                 ),
               ),
             ),
@@ -63,7 +53,6 @@ class _LoginState extends State<Login> {
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Text('Don\'t have an account?'),
                 GestureDetector(
                   onTap: () {
                     Navigator.of(context)
@@ -94,7 +83,7 @@ class _LoginState extends State<Login> {
           TextFormBuilder(
             enabled: !viewModel.loading,
             prefix: Feather.mail,
-            hintText: "Email",
+            hintText: "Email ID",
             textInputAction: TextInputAction.next,
             validateFunction: Validations.validateEmail,
             onSaved: (String val) {
@@ -117,28 +106,6 @@ class _LoginState extends State<Login> {
               viewModel.setPassword(val);
             },
             focusNode: viewModel.passFN,
-          ),
-          Align(
-            alignment: Alignment.centerRight,
-            child: Padding(
-              padding: EdgeInsets.only(right: 10.0),
-              child: InkWell(
-                onTap: () => viewModel.forgotPassword(context),
-                child: Container(
-                  width: 130,
-                  height: 40,
-                  child: Align(
-                    alignment: Alignment.centerRight,
-                    child: Text(
-                      'Forgot Password?',
-                      style: TextStyle(
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
-                  ),
-                ),
-              ),
-            ),
           ),
           SizedBox(height: 10.0),
           Container(
