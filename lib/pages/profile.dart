@@ -9,7 +9,6 @@ import 'package:social_media_app/components/stream_grid_wrapper.dart';
 import 'package:social_media_app/models/post.dart';
 import 'package:social_media_app/models/user.dart';
 import 'package:social_media_app/screens/edit_profile.dart';
-import 'package:social_media_app/screens/settings.dart';
 import 'package:social_media_app/utils/firebase.dart';
 import 'package:social_media_app/widgets/post_tiles.dart';
 import 'package:social_media_app/widgets/posts_view.dart';
@@ -23,7 +22,7 @@ class Profile extends StatefulWidget {
   _ProfileState createState() => _ProfileState();
 }
 
-class _ProfileState extends State<Profile>  {
+class _ProfileState extends State<Profile> {
   User user;
   bool isLoading = false;
   int postCount = 0;
@@ -469,9 +468,77 @@ class _ProfileState extends State<Profile>  {
     if (isToggle == true) {
       return buildGridPost();
     } else if (isToggle == false) {
-      return buildPosts();
+      return buildFollowers();
     }
   }
+
+  buildFollowers() {
+    return StreamBuilder(
+      stream: followingRef
+          .doc(widget.profileId)
+          .collection('userFollowing')
+          .snapshots(),
+      builder: (context,
+          AsyncSnapshot<QuerySnapshot> snapshot) {
+        if (snapshot.hasData) {
+          QuerySnapshot snap = snapshot.data;
+          List<DocumentSnapshot> docs = snap.docs;
+          return ListView.builder(
+            itemCount: docs.length,
+            itemBuilder: (BuildContext context, int index) {
+              DocumentSnapshot doc = docs[index];
+              UserModel user = UserModel.fromJson(doc.data());
+              return Column(
+                children: [
+                  ListTile(
+                    onTap: () => showProfile(context, profileId: user?.id),
+                    contentPadding: EdgeInsets.symmetric(horizontal: 25.0),
+                    leading: CircleAvatar(
+                      radius: 35.0,
+                      backgroundImage: NetworkImage(user?.photoUrl),
+                    ),
+                    title: Text(user?.username,
+                        style: TextStyle(fontWeight: FontWeight.bold)),
+                    subtitle: Text(
+                      user?.email,
+                    ),
+                  ),
+                  Divider(),
+                ],
+              );
+            },
+          );
+        } else {
+          return Center();
+        }
+      },
+    );
+
+  }
+
+  //
+
+
+  // buildPosts() {
+  //   return StreamBuilderWrapper(
+  //     shrinkWrap: true,
+  //     padding: const EdgeInsets.symmetric(horizontal: 20.0),
+  //     stream: postRef
+  //         .where('ownerId', isEqualTo: widget.profileId)
+  //         .orderBy('timestamp', descending: true)
+  //         .snapshots(),
+  //     physics: NeverScrollableScrollPhysics(),
+  //     itemBuilder: (_, DocumentSnapshot snapshot) {
+  //       PostModel posts = PostModel.fromJson(snapshot.data());
+  //       return Padding(
+  //         padding: const EdgeInsets.only(bottom: 15.0),
+  //         child: Posts(
+  //           post: posts,
+  //         ),
+  //       );
+  //     },
+  //   );
+  // }
 
   buildPosts() {
     return StreamBuilderWrapper(
@@ -555,6 +622,14 @@ class _ProfileState extends State<Profile>  {
         }
         return Container();
       },
+    );
+  }
+  showProfile(BuildContext context, {String profileId}) {
+    Navigator.push(
+      context,
+      CupertinoPageRoute(
+        builder: (_) => Profile(profileId: profileId),
+      ),
     );
   }
 }
