@@ -206,7 +206,7 @@ class _CommentsState extends State<Comments> {
       stream: commentRef
           .doc(widget.post.postId)
           .collection('comments')
-          .orderBy('timestamp', descending: true)
+          .orderBy('timestamp', descending: false)
           .snapshots(),
       physics: NeverScrollableScrollPhysics(),
       itemBuilder: (_, DocumentSnapshot snapshot) {
