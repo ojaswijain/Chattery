@@ -54,7 +54,8 @@ class _TimelineState extends State<Timeline> {
     if (querySnapshot.docs.length < documentLimit) {
       hasMore = false;
     }
-    lastDocument = querySnapshot.docs[querySnapshot.docs.length - 1];
+    if(querySnapshot.docs.length >= 1)
+      lastDocument = querySnapshot.docs[querySnapshot.docs.length - 1];
     post.addAll(querySnapshot.docs);
     setState(() {
       isLoading = false;
