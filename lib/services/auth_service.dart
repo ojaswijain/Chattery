@@ -56,10 +56,6 @@ class AuthService {
     }
   }
 
-  forgotPassword(String email) async {
-    await firebaseAuth.sendPasswordResetEmail(email: email);
-  }
-
   logOut() async {
     await firebaseAuth.signOut();
   }
