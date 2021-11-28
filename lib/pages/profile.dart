@@ -98,6 +98,8 @@ class _ProfileState extends State<Profile>  {
                 stream: usersRef.doc(widget.profileId).snapshots(),
                 builder: (context, AsyncSnapshot<DocumentSnapshot> snapshot) {
                   if (snapshot.hasData) {
+                    print(widget.profileId);
+                    print(snapshot.data.toString());
                     UserModel user = UserModel.fromJson(snapshot.data.data());
                     return Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
