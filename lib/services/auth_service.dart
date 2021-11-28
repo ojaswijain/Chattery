@@ -13,14 +13,14 @@ class AuthService {
       {String name,
       User user,
       String email,
-      String country,
+      String gender,
       String password}) async {
     var res = await firebaseAuth.createUserWithEmailAndPassword(
       email: '$email',
       password: '$password',
     );
     if (res.user != null) {
-      await saveUserToFirestore(name, res.user, email, country);
+      await saveUserToFirestore(name, res.user, email, gender);
       return true;
     } else {
       return false;
@@ -29,14 +29,14 @@ class AuthService {
 
 //this will save the details inputted by the user to firestore.
   saveUserToFirestore(
-      String name, User user, String email, String country) async {
+      String name, User user, String email, String gender) async {
     await usersRef.doc(user.uid).set({
       'username': name,
       'email': email,
       'time': Timestamp.now(),
       'id': user.uid,
       'bio': "",
-      'country': country,
+      'gender': gender,
       'photoUrl': user.photoURL ?? ''
     });
   }
@@ -56,10 +56,6 @@ class AuthService {
     }
   }
 
-  forgotPassword(String email) async {
-    await firebaseAuth.sendPasswordResetEmail(email: email);
-  }
-
   logOut() async {
     await firebaseAuth.signOut();
   }
@@ -71,9 +67,9 @@ class AuthService {
       return "Invalid Email";
     } else if (e.contains("ERROR_EMAIL_ALREADY_IN_USE") ||
         e.contains('email-already-in-use')) {
-      return "The email address is already in use by another account.";
+      return "Someone is already using this email!";
     } else if (e.contains("ERROR_NETWORK_REQUEST_FAILED")) {
-      return "Network error occured!";
+      return "Network error occurred!";
     } else if (e.contains("ERROR_USER_NOT_FOUND") ||
         e.contains('firebase_auth/user-not-found')) {
       return "Invalid credentials.";

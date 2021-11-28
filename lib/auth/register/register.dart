@@ -99,12 +99,12 @@ class _RegisterState extends State<Register> {
           SizedBox(height: 20.0),
           TextFormBuilder(
             enabled: !viewModel.loading,
-            prefix: Feather.map_pin,
+            prefix: Feather.users,
             hintText: "Gender",
             textInputAction: TextInputAction.next,
             validateFunction: Validations.validateName,
             onSaved: (String val) {
-              viewModel.setCountry(val);
+              viewModel.setGender(val);
             },
             focusNode: viewModel.countryFN,
             nextFocusNode: viewModel.passFN,

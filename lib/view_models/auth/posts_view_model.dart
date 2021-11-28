@@ -78,7 +78,7 @@ class PostsViewModel extends ChangeNotifier {
   }
 
   setLocation(String val) {
-    print('SetCountry $val');
+    print('SetGender $val');
     location = val;
     notifyListeners();
   }
