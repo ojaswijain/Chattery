@@ -27,7 +27,6 @@ class PostsViewModel extends ChangeNotifier {
   String username;
   File mediaUrl;
   final picker = ImagePicker();
-  String location;
   Position position;
   Placemark placemark;
   String bio;
@@ -42,9 +41,6 @@ class PostsViewModel extends ChangeNotifier {
   bool edit = false;
   String id;
 
-  //controllers
-  TextEditingController locationTEC = TextEditingController();
-
   //Setters
   setEdit(bool val) {
     edit = val;
@@ -55,7 +51,6 @@ class PostsViewModel extends ChangeNotifier {
     if (post != null) {
       description = post.description;
       imgLink = post.mediaUrl;
-      location = post.location;
       edit = true;
       edit = false;
       notifyListeners();
@@ -74,12 +69,6 @@ class PostsViewModel extends ChangeNotifier {
   setDescription(String val) {
     print('SetDescription $val');
     description = val;
-    notifyListeners();
-  }
-
-  setLocation(String val) {
-    print('SetGender $val');
-    location = val;
     notifyListeners();
   }
 
@@ -127,35 +116,11 @@ class PostsViewModel extends ChangeNotifier {
     }
   }
 
-  getLocation() async {
-    loading = true;
-    notifyListeners();
-    LocationPermission permission = await Geolocator.checkPermission();
-    print(permission);
-    if (permission == LocationPermission.denied ||
-        permission == LocationPermission.deniedForever) {
-      LocationPermission rPermission = await Geolocator.requestPermission();
-      print(rPermission);
-      await getLocation();
-    } else {
-      position = await Geolocator.getCurrentPosition(
-          desiredAccuracy: LocationAccuracy.high);
-      List<Placemark> placemarks =
-          await placemarkFromCoordinates(position.latitude, position.longitude);
-      placemark = placemarks[0];
-      location = " ${placemarks[0].locality}, ${placemarks[0].country}";
-      locationTEC.text = location;
-      print(location);
-    }
-    loading = false;
-    notifyListeners();
-  }
-
   uploadPosts(BuildContext context) async {
     try {
       loading = true;
       notifyListeners();
-      await postService.uploadPost(mediaUrl, location, description);
+      await postService.uploadPost(mediaUrl, description);
       loading = false;
       resetPost();
       notifyListeners();
@@ -193,7 +158,6 @@ class PostsViewModel extends ChangeNotifier {
   resetPost() {
     mediaUrl = null;
     description = null;
-    location = null;
     edit = null;
     notifyListeners();
   }

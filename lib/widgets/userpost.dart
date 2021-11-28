@@ -279,13 +279,6 @@ class UserPost extends StatelessWidget {
                               ),
                               overflow: TextOverflow.ellipsis,
                             ),
-                            Text(
-                              '${post?.location ?? 'Chattery'}',
-                              style: TextStyle(
-                                fontSize: 10.0,
-                                color: Color(0xff4D4D4D),
-                              ),
-                            ),
                           ],
                         ),
                       ],

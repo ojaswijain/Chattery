@@ -164,9 +164,6 @@ class _PostsState extends State<Posts> {
     widget.post.username,
     style: TextStyle(fontWeight: FontWeight.bold),
         ),
-        subtitle: Text(
-    widget.post.location == null ? 'Chattery' : widget.post.location,
-        ),
         trailing: isMe
       ? IconButton(
           icon: Icon(Feather.more_horizontal),
