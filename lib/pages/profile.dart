@@ -288,19 +288,6 @@ class _ProfileState extends State<Profile> {
                 if (index > 0) return null;
                 return Column(
                   children: [
-                    Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 20.0),
-                      child: Row(
-                        children: [
-                          Text(
-                            'Posts',
-                            style: TextStyle(fontWeight: FontWeight.w900),
-                          ),
-                          Spacer(),
-                          buildIcons(),
-                        ],
-                      ),
-                    ),
                     buildPostView()
                   ],
                 );
@@ -310,28 +297,6 @@ class _ProfileState extends State<Profile> {
         ],
       ),
     );
-  }
-
-//show the toggling icons "grid" or "list" view.
-  buildIcons() {
-    if (isToggle) {
-      return IconButton(
-          icon: Icon(Feather.list),
-          onPressed: () {
-            setState(() {
-              isToggle = false;
-            });
-          });
-    } else if (isToggle == false) {
-      return IconButton(
-        icon: Icon(Icons.grid_on),
-        onPressed: () {
-          setState(() {
-            isToggle = true;
-          });
-        },
-      );
-    }
   }
 
   buildCount(String label, int count) {

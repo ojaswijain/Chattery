@@ -166,14 +166,10 @@ class _PostsState extends State<Posts> {
         ),
         trailing: isMe
       ? IconButton(
-          icon: Icon(Feather.more_horizontal),
+          icon: Icon(Feather.trash),
           onPressed: () => handleDelete(context),
         )
-      : IconButton(
-          ///Feature coming soon
-          icon: Icon(CupertinoIcons.bookmark, size: 25.0),
-          onPressed: () {},
-        ),
+      : IconButton(),
       );
 
   }
