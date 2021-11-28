@@ -3,7 +3,7 @@ import 'package:flutter_icons/flutter_icons.dart';
 
 AppBar header(context) {
   return AppBar(
-    title: Text('Wooble'),
+    title: Text('Chattery'),
     centerTitle: true,
     actions: [Padding(
       padding: const EdgeInsets.only(right:20.0),
