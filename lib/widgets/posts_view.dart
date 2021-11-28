@@ -167,11 +167,10 @@ class _PostsState extends State<Posts> {
         ),
         trailing: isMe
       ? IconButton(
-          icon: Icon(Feather.more_horizontal),
-          color: Colors.red,
+          icon: Icon(Feather.trash),
           onPressed: () => handleDelete(context),
         )
-      : Center()
+      : IconButton(),
       );
 
   }

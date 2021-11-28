@@ -122,7 +122,7 @@ class _CommentsState extends State<Comments> {
                             padding: const EdgeInsets.only(right: 10.0),
                             child: Icon(
                               Icons.send,
-                              color: Theme.of(context).colorScheme.secondary,
+                              color: Colors.indigo,
                             ),
                           ),
                         ),

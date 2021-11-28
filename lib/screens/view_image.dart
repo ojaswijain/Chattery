@@ -61,7 +61,7 @@ class _ViewImageState extends State<ViewImage> {
                 ),
                 Spacer(),
                 IconButton(
-                  icon: Icon(Feather.more_horizontal),
+                  icon: Icon(Feather.trash),
                   color: Colors.red,
                   onPressed: () => handleDelete(context),
                 ),

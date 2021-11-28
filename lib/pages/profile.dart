@@ -72,7 +72,7 @@ class _ProfileState extends State<Profile> {
     return Scaffold(
       appBar: AppBar(
         centerTitle: true,
-        title: Text('CHATTERY'),
+        title: Text('Chattery'),
         actions: [
           widget.profileId == firebaseAuth.currentUser.uid
               ? Center(
@@ -326,6 +326,7 @@ class _ProfileState extends State<Profile> {
     );
   }
 
+<<<<<<< HEAD
 //show the toggling icons "grid" or "list" view.
   buildIcons() {
     if (isToggle) {
@@ -348,6 +349,8 @@ class _ProfileState extends State<Profile> {
     }
   }
 
+=======
+>>>>>>> ba18e935d817e4f2c18a598e2b4a7cf9a9199290
   buildCount(String label, int count) {
     return Column(
       children: <Widget>[
@@ -595,22 +598,6 @@ class _ProfileState extends State<Profile> {
               }
             },
             child: Container(
-              decoration: BoxDecoration(boxShadow: [
-                BoxShadow(
-                  color: Colors.grey.withOpacity(0.2),
-                  spreadRadius: 3.0,
-                  blurRadius: 5.0,
-                )
-              ], color: Colors.yellowAccent, shape: BoxShape.circle),
-              child: Padding(
-                padding: EdgeInsets.all(3.0),
-                child: Icon(
-                  docs.isEmpty
-                      ? CupertinoIcons.heart
-                      : CupertinoIcons.heart_fill,
-                  color: Colors.orangeAccent,
-                ),
-              ),
             ),
           );
         }
