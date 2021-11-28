@@ -15,17 +15,11 @@ class Timeline extends StatefulWidget {
 
 class _TimelineState extends State<Timeline> {
   final GlobalKey<ScaffoldState> scaffoldKey = GlobalKey<ScaffoldState>();
-
   List<DocumentSnapshot> post = [];
-
   bool isLoading = false;
-
   bool hasMore = true;
-
   int documentLimit = 10;
-
   DocumentSnapshot lastDocument;
-
   ScrollController _scrollController;
 
   getPosts() async {

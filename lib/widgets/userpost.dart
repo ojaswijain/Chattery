@@ -103,6 +103,7 @@ class UserPost extends StatelessWidget {
                                     if (snapshot.hasData) {
                                       QuerySnapshot snap = snapshot.data;
                                       List<DocumentSnapshot> docs = snap.docs;
+                                      print(docs);
                                       return buildLikesCount(
                                           context, docs?.length ?? 0);
                                     } else {
