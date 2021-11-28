@@ -98,7 +98,7 @@ class _CommentsState extends State<Comments> {
                               ),
                               borderRadius: BorderRadius.circular(5.0),
                             ),
-                            hintText: "Write your comment...",
+                            hintText: "Add a comment",
                             hintStyle: TextStyle(
                               fontSize: 15.0,
                               color:
@@ -274,7 +274,7 @@ class _CommentsState extends State<Comments> {
                   )
                 : Icon(
                     CupertinoIcons.heart_fill,
-                    color: Colors.red,
+                    color: Colors.pink,
                   ),
           );
         }

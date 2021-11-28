@@ -37,8 +37,6 @@ class ChatService {
     return imageUrl;
   }
 
-
-//determine if a user has read a chat and updates how many messages are unread
   setUserRead(String chatId, User user, int count) async {
     DocumentSnapshot snap = await chatRef.doc(chatId).get();
     Map reads = snap.get('reads') ?? {};
@@ -46,7 +44,6 @@ class ChatService {
     await chatRef.doc(chatId).update({'reads': reads});
   }
 
-//determine when a user has start typing a message
   setUserTyping(String chatId, User user, bool userTyping) async {
     DocumentSnapshot snap = await chatRef.doc(chatId).get();
     Map typing = snap.get('typing') ?? {};

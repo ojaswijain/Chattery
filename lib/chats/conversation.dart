@@ -281,7 +281,7 @@ class _ConversationState extends State<Conversation> {
               },
             ),
             ListTile(
-              title: Text("Gallery"),
+              title: Text("Choose from Gallery"),
               onTap: () {
                 sendMessage(viewModel, user, imageType: 1, isImage: true);
               },

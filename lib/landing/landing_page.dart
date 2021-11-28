@@ -31,7 +31,7 @@ class _LandingState extends State<Landing> {
               ),
             ),
             Text(
-              'WOOBLE',
+              'Chattery',
               style: TextStyle(
                 fontSize: 22.0,
                 fontWeight: FontWeight.w900,
@@ -66,14 +66,14 @@ class _LandingState extends State<Landing> {
                       begin: Alignment.topRight,
                       end: Alignment.bottomLeft,
                       colors: [
-                        Theme.of(context).accentColor,
-                        Color(0xff597FDB),
+                        Theme.of(context).colorScheme.secondary,
+                        Color(0xff7cdb59),
                       ],
                     ),
                   ),
                   child: Center(
                     child: Text(
-                      'LOGIN',
+                      'Login',
                       style: TextStyle(
                         fontWeight: FontWeight.w900,
                         color: Colors.white,
@@ -97,14 +97,14 @@ class _LandingState extends State<Landing> {
                       begin: Alignment.topRight,
                       end: Alignment.bottomLeft,
                       colors: [
-                        Theme.of(context).accentColor,
-                        Color(0xff597FDB),
+                        Theme.of(context).colorScheme.secondary,
+                        Color(0xff0e3caa),
                       ],
                     ),
                   ),
                   child: Center(
                     child: Text(
-                      'SIGN UP',
+                      'Sign Up',
                       style: TextStyle(
                         fontWeight: FontWeight.w900,
                         color: Colors.white,
