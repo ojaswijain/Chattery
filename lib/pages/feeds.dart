@@ -2,7 +2,6 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:data_connection_checker/data_connection_checker.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
-import 'package:social_media_app/chats/recent_chats.dart';
 import 'package:social_media_app/models/post.dart';
 import 'package:social_media_app/utils/firebase.dart';
 import 'package:social_media_app/widgets/indicators.dart';
@@ -82,21 +81,6 @@ class _TimelineState extends State<Timeline> {
         ),
         centerTitle: true,
         actions: [
-          IconButton(
-            icon: Icon(
-              CupertinoIcons.chat_bubble_2_fill,
-              size: 30.0,
-              color: Theme.of(context).accentColor,
-            ),
-            onPressed: () {
-              Navigator.push(
-                context,
-                CupertinoPageRoute(
-                  builder: (_) => Chats(),
-                ),
-              );
-            },
-          ),
           SizedBox(width: 20.0),
         ],
       ),

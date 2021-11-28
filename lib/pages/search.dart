@@ -40,22 +40,6 @@ class _SearchState extends State<Search> {
     });
   }
 
-  search(String query) {
-    if (query == "") {
-      filteredUsers = users;
-    } else {
-      List userSearch = users.where((userSnap) {
-        Map user = userSnap.data();
-        String userName = user['username'];
-        return userName.toLowerCase().contains(query.toLowerCase());
-      }).toList();
-
-      setState(() {
-        filteredUsers = userSearch;
-      });
-    }
-  }
-
   removeFromList(index) {
     filteredUsers.removeAt(index);
   }
@@ -82,41 +66,10 @@ class _SearchState extends State<Search> {
         Container(
           height: 35.0,
           width: MediaQuery.of(context).size.width - 100,
-          decoration: BoxDecoration(
-            color: Colors.black26,
-            borderRadius: BorderRadius.circular(20.0),
-          ),
           child: Padding(
             padding: const EdgeInsets.symmetric(horizontal: 5.0),
             child: Center(
-              child: TextFormField(
-                controller: searchController,
-                textAlignVertical: TextAlignVertical.center,
-                maxLength: 10,
-                maxLengthEnforcement: MaxLengthEnforcement.enforced,
-                inputFormatters: [
-                  LengthLimitingTextInputFormatter(20),
-                ],
-                textCapitalization: TextCapitalization.sentences,
-                onChanged: (query) {
-                  search(query);
-                },
-                decoration: InputDecoration(
-                  suffixIcon: GestureDetector(
-                    onTap: () {
-                      searchController.clear();
-                    },
-                    child: Icon(Feather.x, size: 12.0, color: Colors.black),
-                  ),
-                  contentPadding: EdgeInsets.only(bottom: 10.0, left: 10.0),
-                  border: InputBorder.none,
-                  counterText: '',
-                  hintText: 'Search...',
-                  hintStyle: TextStyle(
-                    fontSize: 15.0,
-                  ),
-                ),
-              ),
+              child: Text("Users"),
             ),
           ),
         ),

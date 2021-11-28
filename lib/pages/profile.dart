@@ -169,27 +169,7 @@ class _ProfileState extends State<Profile>  {
                                       ],
                                     ),
                                     widget.profileId == currentUserId()
-                                        ? InkWell(
-                                            onTap: () {
-                                              Navigator.of(context).push(
-                                                CupertinoPageRoute(
-                                                  builder: (_) => Setting(),
-                                                ),
-                                              );
-                                            },
-                                            child: Column(
-                                              children: [
-                                                Icon(Feather.settings,
-                                                    color: Theme.of(context)
-                                                        .colorScheme.secondary),
-                                                Text(
-                                                  'Preferences',
-                                                  style:
-                                                      TextStyle(fontSize: 11.5),
-                                                )
-                                              ],
-                                            ),
-                                          )
+                                        ? Center()
                                         : buildLikeButton()
                                   ],
                                 ),

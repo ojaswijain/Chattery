@@ -97,27 +97,27 @@ class PostsViewModel extends ChangeNotifier {
       PickedFile pickedFile = await picker.getImage(
         source: camera ? ImageSource.camera : ImageSource.gallery,
       );
-      File croppedFile = await ImageCropper.cropImage(
-        sourcePath: pickedFile.path,
-        aspectRatioPresets: [
-          CropAspectRatioPreset.square,
-          CropAspectRatioPreset.ratio3x2,
-          CropAspectRatioPreset.original,
-          CropAspectRatioPreset.ratio4x3,
-          CropAspectRatioPreset.ratio16x9
-        ],
-        androidUiSettings: AndroidUiSettings(
-          toolbarTitle: 'Crop Image',
-          toolbarColor: Constants.lightAccent,
-          toolbarWidgetColor: Colors.white,
-          initAspectRatio: CropAspectRatioPreset.original,
-          lockAspectRatio: false,
-        ),
-        iosUiSettings: IOSUiSettings(
-          minimumAspectRatio: 1.0,
-        ),
-      );
-      mediaUrl = File(croppedFile.path);
+      // File croppedFile = await ImageCropper.cropImage(
+      //   sourcePath: pickedFile.path,
+      //   aspectRatioPresets: [
+      //     CropAspectRatioPreset.square,
+      //     CropAspectRatioPreset.ratio3x2,
+      //     CropAspectRatioPreset.original,
+      //     CropAspectRatioPreset.ratio4x3,
+      //     CropAspectRatioPreset.ratio16x9
+      //   ],
+      //   androidUiSettings: AndroidUiSettings(
+      //     toolbarTitle: 'Crop Image',
+      //     toolbarColor: Constants.lightAccent,
+      //     toolbarWidgetColor: Colors.white,
+      //     initAspectRatio: CropAspectRatioPreset.original,
+      //     lockAspectRatio: false,
+      //   ),
+      //   iosUiSettings: IOSUiSettings(
+      //     minimumAspectRatio: 1.0,
+      //   ),
+      // );
+      mediaUrl = File(pickedFile.path);
       loading = false;
       notifyListeners();
     } catch (e) {
@@ -125,30 +125,6 @@ class PostsViewModel extends ChangeNotifier {
       notifyListeners();
       showInSnackBar('Cancelled',context);
     }
-  }
-
-  getLocation() async {
-    loading = true;
-    notifyListeners();
-    LocationPermission permission = await Geolocator.checkPermission();
-    print(permission);
-    if (permission == LocationPermission.denied ||
-        permission == LocationPermission.deniedForever) {
-      LocationPermission rPermission = await Geolocator.requestPermission();
-      print(rPermission);
-      await getLocation();
-    } else {
-      position = await Geolocator.getCurrentPosition(
-          desiredAccuracy: LocationAccuracy.high);
-      List<Placemark> placemarks =
-          await placemarkFromCoordinates(position.latitude, position.longitude);
-      placemark = placemarks[0];
-      location = " ${placemarks[0].locality}, ${placemarks[0].country}";
-      locationTEC.text = location;
-      print(location);
-    }
-    loading = false;
-    notifyListeners();
   }
 
   uploadPosts(BuildContext context) async {

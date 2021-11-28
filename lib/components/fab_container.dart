@@ -29,7 +29,7 @@ class FabContainer extends StatelessWidget {
           backgroundColor: Theme.of(context).primaryColor,
           child: Icon(
             icon,
-            color: Theme.of(context).accentColor,
+            //color: Theme.of(context).accentColor,
           ),
           onPressed: () {
             chooseUpload(context);

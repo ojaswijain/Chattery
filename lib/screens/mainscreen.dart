@@ -94,7 +94,6 @@ class _TabScreenState extends State<TabScreen> {
     return Container(
       height: 45.0,
       width: 45.0,
-      // ignore: missing_required_param
       child: FabContainer(
         icon: Feather.plus,
         mini: true,
