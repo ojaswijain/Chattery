@@ -57,7 +57,7 @@ class _CreatePostState extends State<CreatePost> {
                     style: TextStyle(
                       fontWeight: FontWeight.bold,
                       fontSize: 15.0,
-                      color: Theme.of(context).colorScheme.secondary,
+                      color: Colors.white,
                     ),
                   ),
                 ),
