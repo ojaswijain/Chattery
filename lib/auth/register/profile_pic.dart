@@ -43,7 +43,7 @@ class _ProfilePictureState extends State<ProfilePicture> {
                       Radius.circular(3.0),
                     ),
                     border: Border.all(
-                      color: Theme.of(context).accentColor,
+                      color: Theme.of(context).colorScheme.secondary,
                     ),
                   ),
                   child: viewModel.imgLink != null
@@ -56,9 +56,9 @@ class _ProfilePictureState extends State<ProfilePicture> {
                       : viewModel.mediaUrl == null
                           ? Center(
                               child: Text(
-                                'upload your profile picture',
+                                'Upload your profile picture',
                                 style: TextStyle(
-                                  color: Theme.of(context).accentColor,
+                                  color: Theme.of(context).colorScheme.secondary,
                                 ),
                               ),
                             )
@@ -75,7 +75,7 @@ class _ProfilePictureState extends State<ProfilePicture> {
                 child: ElevatedButton(
                   style: ButtonStyle(
                     backgroundColor: MaterialStateProperty.all<Color>(
-                        Theme.of(context).accentColor),
+                        Theme.of(context).colorScheme.secondary),
                     shape: MaterialStateProperty.all<RoundedRectangleBorder>(
                       RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(5.0),
@@ -83,7 +83,7 @@ class _ProfilePictureState extends State<ProfilePicture> {
                     ),
                   ),
                   child: Center(
-                    child: Text('done'.toUpperCase()),
+                    child: Text('Done'.toUpperCase()),
                   ),
                   onPressed: () => viewModel.uploadProfilePicture(context),
                 ),

@@ -175,7 +175,7 @@ class _SearchState extends State<Search> {
                       height: 30.0,
                       width: 62.0,
                       decoration: BoxDecoration(
-                        color: Theme.of(context).accentColor,
+                        color: Theme.of(context).colorScheme.secondary,
                         borderRadius: BorderRadius.circular(3.0),
                       ),
                       child: Center(

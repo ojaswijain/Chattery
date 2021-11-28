@@ -29,7 +29,7 @@ class _RegisterState extends State<Register> {
           children: [
             SizedBox(height: 10.0),
             Text(
-              'Welcome to Wooble Social App..\nCreate a new account and connect with friends',
+              'Welcome to Chattery\nCreate a new account here',
               style: TextStyle(
                   fontWeight: FontWeight.bold,
                   fontSize: 18.0,
@@ -42,7 +42,7 @@ class _RegisterState extends State<Register> {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Text(
-                  'Already have an account  ',
+                  'Already have an account?',
                 ),
                 GestureDetector(
                   onTap: () {
@@ -50,10 +50,10 @@ class _RegisterState extends State<Register> {
                         .push(CupertinoPageRoute(builder: (_) => Login()));
                   },
                   child: Text(
-                    'Login',
+                    'Sign in',
                     style: TextStyle(
                       fontWeight: FontWeight.bold,
-                      color: Theme.of(context).accentColor,
+                      color: Theme.of(context).colorScheme.secondary,
                     ),
                   ),
                 ),
@@ -100,7 +100,7 @@ class _RegisterState extends State<Register> {
           TextFormBuilder(
             enabled: !viewModel.loading,
             prefix: Feather.map_pin,
-            hintText: "Country",
+            hintText: "Gender",
             textInputAction: TextInputAction.next,
             validateFunction: Validations.validateName,
             onSaved: (String val) {
@@ -150,7 +150,7 @@ class _RegisterState extends State<Register> {
                   ),
                 ),
                 backgroundColor: MaterialStateProperty.all<Color>(
-                    Theme.of(context).accentColor),
+                    Theme.of(context).colorScheme.secondary),
               ),
               child: Text(
                 'sign up'.toUpperCase(),

@@ -25,7 +25,7 @@ class ChatBubble extends StatefulWidget {
 class _ChatBubbleState extends State<ChatBubble> {
   Color chatBubbleColor() {
     if (widget.isMe) {
-      return Theme.of(context).accentColor;
+      return Theme.of(context).colorScheme.secondary;
     } else {
       if (Theme.of(context).brightness == Brightness.dark) {
         return Colors.grey[800];
@@ -34,12 +34,11 @@ class _ChatBubbleState extends State<ChatBubble> {
       }
     }
   }
-
   Color chatBubbleReplyColor() {
     if (Theme.of(context).brightness == Brightness.dark) {
-      return Colors.grey[600];
+      return Colors.grey[800];
     } else {
-      return Colors.grey[50];
+      return Colors.grey[100];
     }
   }
 
