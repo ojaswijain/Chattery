@@ -60,7 +60,7 @@ class _ProfileState extends State<Profile> {
     return Scaffold(
       appBar: AppBar(
         centerTitle: true,
-        title: Text('CHATTERY'),
+        title: Text('Chattery'),
         actions: [
           widget.profileId == firebaseAuth.currentUser.uid
               ? Center(
@@ -601,22 +601,6 @@ class _ProfileState extends State<Profile> {
               }
             },
             child: Container(
-              decoration: BoxDecoration(boxShadow: [
-                BoxShadow(
-                  color: Colors.grey.withOpacity(0.2),
-                  spreadRadius: 3.0,
-                  blurRadius: 5.0,
-                )
-              ], color: Colors.yellowAccent, shape: BoxShape.circle),
-              child: Padding(
-                padding: EdgeInsets.all(3.0),
-                child: Icon(
-                  docs.isEmpty
-                      ? CupertinoIcons.heart
-                      : CupertinoIcons.heart_fill,
-                  color: Colors.orangeAccent,
-                ),
-              ),
             ),
           );
         }
