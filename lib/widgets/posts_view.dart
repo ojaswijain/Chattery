@@ -156,6 +156,7 @@ class _PostsState extends State<Posts> {
   }
 
   Widget buildPostHeader() {
+    print("ppp");
     bool isMe = currentUserId() == widget.post.ownerId;
     return ListTile(
         contentPadding: EdgeInsets.symmetric(horizontal: 5.0),
@@ -167,13 +168,10 @@ class _PostsState extends State<Posts> {
         trailing: isMe
       ? IconButton(
           icon: Icon(Feather.more_horizontal),
+          color: Colors.red,
           onPressed: () => handleDelete(context),
         )
-      : IconButton(
-          ///Feature coming soon
-          icon: Icon(CupertinoIcons.bookmark, size: 25.0),
-          onPressed: () {},
-        ),
+      : Center()
       );
 
   }

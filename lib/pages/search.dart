@@ -113,7 +113,7 @@ class _SearchState extends State<Search> {
                   ),
                   trailing: GestureDetector(
                     onTap: () {
-                      Navigator.pop(context);
+                      //Navigator.pop(context);
                       Navigator.push(
                         context,
                         CupertinoPageRoute(

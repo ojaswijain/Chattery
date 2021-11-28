@@ -33,13 +33,25 @@ class _ProfileState extends State<Profile> {
   UserModel users;
   final DateTime timestamp = DateTime.now();
   ScrollController controller = ScrollController();
-
+  List<DocumentSnapshot> following=[];
   currentUserId() {
     return firebaseAuth.currentUser?.uid;
   }
-
+  getFollowing() async {
+    QuerySnapshot snap = await followingRef
+        .doc(widget.profileId)
+        .collection('userFollowing')
+        .get();
+    for(int i=0;i<snap.docs.length;i++){
+      DocumentSnapshot snap2 = await usersRef.doc(snap.docs[i].id).get();
+      following.add(snap2);
+    }
+    print("lll");
+    print(following[0].id);
+  }
   @override
   void initState() {
+    getFollowing();
     super.initState();
     checkIfFollowing();
   }
@@ -293,7 +305,7 @@ class _ProfileState extends State<Profile> {
                       child: Row(
                         children: [
                           Text(
-                            'Posts',
+                            isToggle?'Posts':'Friends',
                             style: TextStyle(fontWeight: FontWeight.w900),
                           ),
                           Spacer(),
@@ -301,12 +313,14 @@ class _ProfileState extends State<Profile> {
                         ],
                       ),
                     ),
-                    buildPostView()
+                    isToggle?
+                    buildGridPost():buildFollowers(),
                   ],
                 );
               },
             ),
-          )
+          ),
+
         ],
       ),
     );
@@ -316,7 +330,7 @@ class _ProfileState extends State<Profile> {
   buildIcons() {
     if (isToggle) {
       return IconButton(
-          icon: Icon(Feather.list),
+          icon: Icon(Icons.grid_on),
           onPressed: () {
             setState(() {
               isToggle = false;
@@ -324,7 +338,7 @@ class _ProfileState extends State<Profile> {
           });
     } else if (isToggle == false) {
       return IconButton(
-        icon: Icon(Icons.grid_on),
+        icon: Icon(Feather.list),
         onPressed: () {
           setState(() {
             isToggle = true;
@@ -473,47 +487,27 @@ class _ProfileState extends State<Profile> {
   }
 
   buildFollowers() {
-    return StreamBuilder(
-      stream: followingRef
-          .doc(widget.profileId)
-          .collection('userFollowing')
-          .snapshots(),
-      builder: (context,
-          AsyncSnapshot<QuerySnapshot> snapshot) {
-        if (snapshot.hasData) {
-          QuerySnapshot snap = snapshot.data;
-          List<DocumentSnapshot> docs = snap.docs;
-          return ListView.builder(
-            itemCount: docs.length,
-            itemBuilder: (BuildContext context, int index) {
-              DocumentSnapshot doc = docs[index];
-              UserModel user = UserModel.fromJson(doc.data());
-              return Column(
-                children: [
-                  ListTile(
-                    onTap: () => showProfile(context, profileId: user?.id),
-                    contentPadding: EdgeInsets.symmetric(horizontal: 25.0),
-                    leading: CircleAvatar(
-                      radius: 35.0,
-                      backgroundImage: NetworkImage(user?.photoUrl),
-                    ),
-                    title: Text(user?.username,
-                        style: TextStyle(fontWeight: FontWeight.bold)),
-                    subtitle: Text(
-                      user?.email,
-                    ),
-                  ),
-                  Divider(),
-                ],
-              );
-            },
+    return  ListView.builder(
+        itemCount: following.length,
+        shrinkWrap: true,
+        scrollDirection: Axis.vertical,
+        itemBuilder: (BuildContext context, int index) {
+          DocumentSnapshot doc = following[index];
+          print(following[index].id);
+          UserModel user = UserModel.fromJson(doc.data());
+          print(user.id.toString());
+          return ListTile(
+          onTap: () => showProfile(context, profileId: user?.id),
+          contentPadding: EdgeInsets.symmetric(horizontal: 25.0),
+          leading: CircleAvatar(
+          radius: 35.0,
+          backgroundImage: NetworkImage(user?.photoUrl),
+          ),
+          title: Text(user?.username,
+          style: TextStyle(fontWeight: FontWeight.bold)),
           );
-        } else {
-          return Center();
-        }
-      },
-    );
-
+          }
+          );
   }
 
   //

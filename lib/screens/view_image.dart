@@ -54,16 +54,61 @@ class _ViewImageState extends State<ViewImage> {
                         Icon(Feather.clock, size: 13.0),
                         SizedBox(width: 3.0),
                         Text(timeago.format(widget.post.timestamp.toDate())),
+
                       ],
                     ),
                   ],
                 ),
                 Spacer(),
+                IconButton(
+                  icon: Icon(Feather.more_horizontal),
+                  color: Colors.red,
+                  onPressed: () => handleDelete(context),
+                ),
                 buildLikeButton(),
               ]),
             ),
           )),
     );
+  }
+  handleDelete(BuildContext parentContext) {
+    //shows a simple dialog box
+    return showDialog(
+        context: parentContext,
+        builder: (context) {
+          return SimpleDialog(
+            shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(5.0)),
+            children: [
+              SimpleDialogOption(
+                onPressed: () {
+                  Navigator.pop(context);
+                  deletePost();
+                },
+                child: Text('Delete Post'),
+              ),
+              Divider(),
+              SimpleDialogOption(
+                onPressed: () {
+                  Navigator.pop(context);
+                },
+                child: Text('Cancel'),
+              ),
+            ],
+          );
+        });
+  }
+  deletePost() async {
+    postRef.doc(widget.post.id).delete();
+
+//delete all the comments associated with that given post
+    QuerySnapshot commentSnapshot =
+    await commentRef.doc(widget.post.postId).collection('comments').get();
+    commentSnapshot.docs.forEach((doc) {
+      if (doc.exists) {
+        doc.reference.delete();
+      }
+    });
   }
 
   buildImage(BuildContext context) {
