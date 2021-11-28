@@ -217,10 +217,8 @@ class _PostsState extends State<Posts> {
                   'postId': widget.post.postId,
                   'dateCreated': Timestamp.now(),
                 });
-                addLikesToNotification();
               } else {
                 likesRef.doc(docs[0].id).delete();
-                removeLikeFromNotification();
               }
             },
             icon: docs.isEmpty
@@ -238,44 +236,7 @@ class _PostsState extends State<Posts> {
     );
   }
 
-  addLikesToNotification() async {
-    bool isNotMe = currentUserId() != widget.post.ownerId;
 
-    if (isNotMe) {
-      DocumentSnapshot doc = await usersRef.doc(currentUserId()).get();
-      user = UserModel.fromJson(doc.data());
-      notificationRef
-          .doc(widget.post.ownerId)
-          .collection('notifications')
-          .doc(widget.post.postId)
-          .set({
-        "type": "like",
-        "username": user.username,
-        "userId": currentUserId(),
-        "userDp": user.photoUrl,
-        "postId": widget.post.postId,
-        "mediaUrl": widget.post.mediaUrl,
-        "timestamp": timestamp,
-      });
-    }
-  }
-
-  removeLikeFromNotification() async {
-    bool isNotMe = currentUserId() != widget.post.ownerId;
-
-    if (isNotMe) {
-      DocumentSnapshot doc = await usersRef.doc(currentUserId()).get();
-      user = UserModel.fromJson(doc.data());
-      notificationRef
-          .doc(widget.post.ownerId)
-          .collection('notifications')
-          .doc(widget.post.postId)
-          .get()
-          .then((doc) => {
-                if (doc.exists) {doc.reference.delete()}
-              });
-    }
-  }
 
   handleDelete(BuildContext parentContext) {
     //shows a simple dialog box
@@ -308,18 +269,6 @@ class _PostsState extends State<Posts> {
 //you can only delete your own posts
   deletePost() async {
     postRef.doc(widget.post.id).delete();
-
-//delete notification associated with that given post
-    QuerySnapshot notificationsSnap = await notificationRef
-        .doc(widget.post.ownerId)
-        .collection('notifications')
-        .where('postId', isEqualTo: widget.post.postId)
-        .get();
-    notificationsSnap.docs.forEach((doc) {
-      if (doc.exists) {
-        doc.reference.delete();
-      }
-    });
 
 //delete all the comments associated with that given post
     QuerySnapshot commentSnapshot =

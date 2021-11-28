@@ -463,17 +463,6 @@ class _ProfileState extends State<Profile>  {
         doc.reference.delete();
       }
     });
-    //remove from notifications feeds
-    notificationRef
-        .doc(widget.profileId)
-        .collection('notifications')
-        .doc(currentUserId())
-        .get()
-        .then((doc) {
-      if (doc.exists) {
-        doc.reference.delete();
-      }
-    });
   }
 
   handleFollow() async {
@@ -494,19 +483,6 @@ class _ProfileState extends State<Profile>  {
         .collection('userFollowing')
         .doc(widget.profileId)
         .set({});
-    //update the notification feeds
-    notificationRef
-        .doc(widget.profileId)
-        .collection('notifications')
-        .doc(currentUserId())
-        .set({
-      "type": "follow",
-      "ownerId": widget.profileId,
-      "username": users.username,
-      "userId": users.id,
-      "userDp": users.photoUrl,
-      "timestamp": timestamp,
-    });
   }
 
   buildPostView() {
