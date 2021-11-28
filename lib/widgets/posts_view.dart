@@ -165,7 +165,7 @@ class _PostsState extends State<Posts> {
     style: TextStyle(fontWeight: FontWeight.bold),
         ),
         subtitle: Text(
-    widget.post.location == null ? 'Wooble' : widget.post.location,
+    widget.post.location == null ? 'Chattery' : widget.post.location,
         ),
         trailing: isMe
       ? IconButton(
